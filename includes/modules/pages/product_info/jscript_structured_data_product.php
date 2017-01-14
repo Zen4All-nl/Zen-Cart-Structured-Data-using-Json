@@ -13,7 +13,7 @@ define('STRUCTURED_DATA_STOCK', 'InStock'); // Discontinued, InStock, InStoreOnl
 $reviewQuery = "SELECT r.reviews_id, r.customers_name, r.reviews_rating, r.date_added, rd.reviews_text
                 FROM " . TABLE_REVIEWS . " r
                 LEFT JOIN " . TABLE_REVIEWS_DESCRIPTION . " rd ON rd.reviews_id = r.reviews_id
-                WHERE products_id = " . (int)$product_info->fields['products_id'];
+                WHERE products_id = " . (int)$_GET['products_id'];
 $review = $db->Execute($reviewQuery);
 while (!$review->EOF) {
   $reviewArray[] = array(
@@ -44,14 +44,14 @@ if ($reviewCount != 0) {
 
 $reviewHighestRatingQuery = "SELECT reviews_id, reviews_rating
                              FROM " . TABLE_REVIEWS . "
-                             WHERE products_id = " . (int)$product_info->fields['products_id'] . "
+                             WHERE products_id = " . (int)$_GET['products_id'] . "
                              ORDER BY reviews_rating DESC LIMIT 1";
 $reviewHighestRating = $db->Execute($reviewHighestRatingQuery);
 
 $reviewLowestRatingQuery = "SELECT reviews_id, reviews_rating
-                             FROM " . TABLE_REVIEWS . "
-                             WHERE products_id = " . (int)$product_info->fields['products_id'] . "
-                             ORDER BY reviews_rating ASC LIMIT 1";
+                            FROM " . TABLE_REVIEWS . "
+                            WHERE products_id = " . (int)$_GET['products_id'] . "
+                            ORDER BY reviews_rating ASC LIMIT 1";
 $reviewLowestRating = $db->Execute($reviewLowestRatingQuery);
 ?>
 <?php $i=0 ?>
@@ -59,13 +59,13 @@ $reviewLowestRating = $db->Execute($reviewLowestRatingQuery);
 {
   "@context": "http://schema.org/",
   "@type": "Product",
-  "name": "<?php echo $products_name; ?>",
-  "image": "<?php echo (($request_type == 'SSL') ? HTTPS_SERVER . DIR_WS_HTTPS_CATALOG : HTTP_SERVER . DIR_WS_CATALOG ) . '/' . DIR_WS_IMAGES . $product_info->fields['products_image']; ?>",
-  "description": "<?php echo htmlspecialchars(zen_clean_html(stripslashes(zen_get_products_description((int)$product_info->fields['products_id'], $_SESSION['languages_id']))), ENT_QUOTES); ?>",
-  "mpn": "<?php echo $products_model; ?>",
+  "name": "<?php echo zen_get_products_name((int)$_GET['products_id'], $_SESSION['languages_id']); ?>",
+  "image": "<?php echo (($request_type == 'SSL') ? HTTPS_SERVER . DIR_WS_HTTPS_CATALOG : HTTP_SERVER . DIR_WS_CATALOG ) . '/' . DIR_WS_IMAGES . zen_get_products_image((int)$_GET['products_id']); ?>",
+  "description": "<?php echo htmlspecialchars(zen_clean_html(stripslashes(zen_get_products_description((int)$_GET['products_id'], $_SESSION['languages_id']))), ENT_QUOTES); ?>",
+  "mpn": "<?php echo zen_get_products_model((int)$_GET['products_id']); ?>",
   "brand": {
     "@type": "Thing",
-    "name": "<?php echo $manufacturers_name; ?>"
+    "name": "<?php echo zen_get_products_manufacturers_name((int)$_GET['products_id']); ?>"
   },
 <?php if($review->RecordCount() > 0) { ?>
   "aggregateRating": {
@@ -87,7 +87,7 @@ $reviewLowestRating = $db->Execute($reviewLowestRatingQuery);
   "offers": {
     "@type": "Offer",
     "priceCurrency": "<?php echo $_SESSION['currency']; ?>",
-    "price": "<?php echo $products_price = (round(zen_get_products_base_price($product_info->fields['products_id']),2)); ?>",
+    "price": "<?php echo $products_price = (round(zen_get_products_base_price((int)$_GET['products_id']),2)); ?>",
     "priceValidUntil": "2020-11-05",
     "itemCondition": "http://schema.org/<?php echo STRUCTURED_DATA_CONDITION; ?>",
     "availability": "http://schema.org/<?php echo STRUCTURED_DATA_STOCK; ?>",

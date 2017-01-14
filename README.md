@@ -11,3 +11,7 @@ There are multiple Json files, each controling a different part of the structure
 after copying the files you need to edit them for some aditional info:
 - structured_data_organisation.php -> line 20 through 24: here you can add your languages and you social media profiles
 - structured_data_organisation.php -> open and edit all the info
+
+
+In a not to distant futere I want to add some database constants to controll all edits.
+This is the minimal required info in the files for Google. You can add a lot more data if you like

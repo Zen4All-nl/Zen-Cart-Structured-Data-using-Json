@@ -1,9 +1,13 @@
 # Zen-Cart-Structured-Data-using-Json
 There already are several Structured Data modules available for Zen Cart, but this one does not hack core files. Instead the data is generated through Json files
 
-There will be multiple Json files, each controling a different part of the structured data mark up.
-- structured_data_product.php
-- structured_data_breadcrumb.php
-- structured_data_organisation.php
-- structured_data_website.php
-- structured_data_professional_service.php
+There are multiple Json files, each controling a different part of the structured data mark up.
+- structured_data_product.php, for product data and reviews
+- structured_data_breadcrumb.php, for the breadcrumb trail
+- structured_data_organisation.php, for info about your organistion
+- structured_data_website.php, for info about the website
+- structured_data_professional_service.php, for information about the services you provide
+
+after copying the files you need to edit them for some aditional info:
+- structured_data_organisation.php -> line 20 through 24: here you can add your languages and you social media profiles
+- structured_data_organisation.php -> open and edit all the info

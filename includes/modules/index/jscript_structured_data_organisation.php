@@ -20,8 +20,8 @@
     "availableLanguage" : ["Dutch", "English"]
   }],
   "sameAs" : [
-    "https://nl.linkedin.com/in/erik-kerkhoven-46913020",
-    "https://twitter.com/zen4all_nl"
+    "https://nl.linkedin.com/in/YOUR_ACCOUNT",
+    "https://twitter.com/YOUR_ACCOUNT"
   ]
 }
 </script>

@@ -16,11 +16,11 @@
   "name": "<?php echo STORE_NAME; ?>",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Spaarnestraat 38",
-    "addressLocality": "Amersfoort",
-    "addressRegion": "UT",
-    "postalCode": "3812HG",
-    "addressCountry": "NL"
+    "streetAddress": "YOUR STREET 1",
+    "addressLocality": "YOUR_CITY",
+    "addressRegion": "YOUR_STATE",
+    "postalCode": "YOUR_ZIP",
+    "addressCountry": "YOUR_CONTRY" // 2 Letrer iso code
   },
   "geo": {
     "@type": "GeoCoordinates",
